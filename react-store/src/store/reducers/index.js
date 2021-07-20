@@ -1,7 +1,8 @@
-import { SET_PERSONS } from '../action-types';
+import { SET_PERSONS, SET_TODOS } from '../action-types';
 
 const initialState = {
-	persons: null
+	persons: null,
+	todos: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +13,12 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				persons: payload
+			};
+		}
+		case SET_TODOS: {
+			return {
+				...state,
+				todos: payload
 			};
 		}
 		default: {

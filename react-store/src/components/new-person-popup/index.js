@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class NewPersonPopup extends Component {
@@ -15,8 +15,8 @@ class NewPersonPopup extends Component {
 	};
 
 	onSaveHandler = () => {
-		const {firstName, lastName, age} = this.state;
-		const {onSave, closePopup} = this.props;
+		const { firstName, lastName, age } = this.state;
+		const { onSave, closePopup } = this.props;
 
 		onSave({
 			firstName,
@@ -45,14 +45,14 @@ class NewPersonPopup extends Component {
 	}
 
 	render() {
-		const {firstName, lastName, age} = this.state;
-		const {closePopup} = this.props;
+		const { firstName, lastName, age } = this.state;
+		const { closePopup } = this.props;
 
 		return (
 			<div>
-				FirstName: <input type='text' value={firstName} onChange={this.onFirstNameChange}/><br/>
-				LastName: <input type='text' value={lastName} onChange={this.onLastNameChange}/><br/>
-				Age: <input type='number' value={age} onChange={this.onAgeChange}/><br/>
+				FirstName: <input type='text' value={firstName} onChange={this.onFirstNameChange} /><br />
+				LastName: <input type='text' value={lastName} onChange={this.onLastNameChange} /><br />
+				Age: <input type='number' value={age} onChange={this.onAgeChange} /><br />
 
 				<button onClick={closePopup}>
 					Cancel

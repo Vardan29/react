@@ -1,8 +1,9 @@
-import {TABS} from './helpers/constants';
-import React, {Component} from 'react';
+import { TABS } from './helpers/constants';
+import React, { Component } from 'react';
 import Home from './containers/home';
 import About from './containers/about';
 import ContactUs from './containers/contact-us';
+import Todos from './containers/todos'
 
 class App extends Component {
 
@@ -11,22 +12,24 @@ class App extends Component {
 	};
 
 	getSelectedTab() {
-		const {selectedTabId} = this.state;
+		const { selectedTabId } = this.state;
 
 		switch (selectedTabId) {
 			case 1:
-				return <Home/>;
+				return <Home />;
 			case 2:
-				return <About/>;
+				return <About />;
 			case 3:
-				return <ContactUs/>;
+				return <ContactUs />;
+			case 4:
+				return <Todos />;
 			default:
 				return null;
 		}
 	}
 
 	render() {
-		const {selectedTabId} = this.state;
+		const { selectedTabId } = this.state;
 
 		return (
 			<div>
@@ -35,7 +38,7 @@ class App extends Component {
 						<li
 							key={tab.id}
 							className={tab.id === selectedTabId ? 'active' : ''}
-							onClick={() => this.setState({selectedTabId: tab.id})}
+							onClick={() => this.setState({ selectedTabId: tab.id })}
 						>
 							{tab.name}
 						</li>

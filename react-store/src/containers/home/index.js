@@ -1,8 +1,8 @@
-import {createPerson, deletePerson, getPersons} from '../../core';
+import { createPerson, deletePerson, getPersons } from '../../core';
 import NewPersonPopup from '../../components/new-person-popup';
 import PersonRow from '../../components/person-row';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Home extends Component {
@@ -28,8 +28,8 @@ class Home extends Component {
 	}
 
 	render() {
-		const {persons} = this.props;
-		const {isPopupShown} = this.state;
+		const { persons } = this.props;
+		const { isPopupShown } = this.state;
 
 		if (!persons) {
 			return <div>Loading</div>;
@@ -57,14 +57,14 @@ class Home extends Component {
 					</tbody>
 				</table>
 
-				<button onClick={() => this.setState({isPopupShown: true})}>
+				<button onClick={() => this.setState({ isPopupShown: true })}>
 					Create
 				</button>
 
 				{isPopupShown ?
 					<NewPersonPopup
 						onSave={this.onCreatePerson}
-						closePopup={() => this.setState({isPopupShown: false})}
+						closePopup={() => this.setState({ isPopupShown: false })}
 					/> :
 					null
 				}
@@ -74,7 +74,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => {
-	const persons = state.persons;
+	const { persons } = state;
 
 	return {
 		persons
