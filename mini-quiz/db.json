@@ -1,0 +1,50 @@
+{
+  "quiz": [
+    {
+      "id": 1,
+      "question": "How many continents on earth?",
+      "rightAnswerId": "B",
+      "answers": [
+        {
+          "id": "A",
+          "text": "Earth has 5 continents"
+        },
+        {
+          "id": "B",
+          "text": "Earth has 7 continents"
+        },
+        {
+          "id": "C",
+          "text": "Earth has 6 continents"
+        },
+        {
+          "id": "D",
+          "text": "Earth has 9 continents"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Which company was created react?",
+      "rightAnswerId": "C",
+      "answers": [
+        {
+          "id": "A",
+          "text": "Apple"
+        },
+        {
+          "id": "B",
+          "text": "Microsoft"
+        },
+        {
+          "id": "C",
+          "text": "Facebook"
+        },
+        {
+          "id": "D",
+          "text": "JetBrains"
+        }
+      ]
+    }
+  ]
+}
