@@ -10,6 +10,9 @@
 .quiz h1 {
     margin-left: 10px;
 }
+.quiz div *{
+    text-align: center;
+}
 .quiz-wrapper {
     width: 600px;
 }

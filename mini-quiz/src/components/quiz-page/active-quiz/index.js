@@ -1,26 +1,29 @@
 import React from "react";
 import AnswersList from "../answers-list";
-import '../../../assets/styles/quiz-page/active-quiz/index.css'
+import '../../../assets/styles/quiz-page/active-quiz/index.css';
 import {useSelector} from "react-redux";
 
-const ActiveQuiz = props => {
-    const quizListLength = useSelector(state => state.quiz.length)
-    const {activeQuiz} = props;
+const ActiveQuiz = (props) => {
+    const current = useSelector(state => state.current);
+    const quizListLength = useSelector(state => state.quiz.length);
+    const {id,question,answers} = props.quiz[current];
+
     return (
-        <div className="active-quiz">
-            <p className="question">
-            <span>
-                <strong>{activeQuiz.id}. </strong>
-                {activeQuiz.question}
-            </span>
-                <small>
-                    {activeQuiz.id} from {quizListLength}
-                </small>
-            </p>
-            <AnswersList
-                answers={activeQuiz.answers}
-            />
-        </div>
+        <>
+            <h1>Answer all questions</h1>
+            <div className="active-quiz">
+                <p className="question">
+                    <span>
+                        <strong>{id}. </strong>
+                        {question}
+                    </span>
+                    <small>
+                        {id} from {quizListLength}
+                    </small>
+                </p>
+                <AnswersList answers={answers}/>
+            </div>
+        </>
     );
 }
 
