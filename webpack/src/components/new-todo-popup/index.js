@@ -1,22 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class NewTodoPopup extends Component {
+const NewTodoPopup = ({ onSave, closePopup }) => {
 
-  static propTypes = {
-    closePopup: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
-  };
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
-  state = {
-    title: '',
-    content: ''
-  };
-
-  onSaveHandler = () => {
-    const { title, content, } = this.state;
-    const { onSave, closePopup } = this.props;
-
+  const onSaveHandler = () => {
     onSave({
       title,
       content
@@ -24,31 +14,24 @@ class NewTodoPopup extends Component {
     closePopup();
   }
 
-  onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    });
-  }
+  return (
+    <div>
+      title: <input type='text' name='title' value={title} onChange={({ target: { value } }) => { setTitle(value) }} /><br />
+      content: <input type='text' name='content' value={content} onChange={({ target: { value } }) => { setContent(value) }} /><br />
 
-  render() {
-    const { title, content } = this.state;
-    const { closePopup } = this.props;
-
-    return (
-      <div>
-        title: <input type='text' name='title' value={title} onChange={this.onChangeHandler} /><br />
-        content: <input type='text' name='content' value={content} onChange={this.onChangeHandler} /><br />
-
-        <button onClick={closePopup}>
-          Cancel
-        </button>
-        <button onClick={this.onSaveHandler}>
-          Save
-        </button>
-      </div>
-    );
-  }
+      <button onClick={closePopup}>
+        Cancel
+      </button>
+      <button onClick={onSaveHandler}>
+        Save
+      </button>
+    </div>
+  );
 }
+
+NewTodoPopup.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
+};
 
 export default NewTodoPopup;

@@ -1,23 +1,13 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class NewPersonPopup extends Component {
+const NewPersonPopup = ({ onsave, closePopup }) => {
 
-  static propTypes = {
-    closePopup: PropTypes.func.isRequired,
-    onSave: PropTypes.func.isRequired
-  };
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState(0);
 
-  state = {
-    firstName: '',
-    lastName: '',
-    age: 0
-  };
-
-  onSaveHandler = () => {
-    const { firstName, lastName, age } = this.state;
-    const { onSave, closePopup } = this.props;
-
+  const onSaveHandler = () => {
     onSave({
       firstName,
       lastName,
@@ -25,40 +15,25 @@ class NewPersonPopup extends Component {
     });
     closePopup();
   }
+  return (
+    <div>
+      FirstName: <input type='text' name='firstName' value={firstName} onChange={({ target: { value } }) => { setFirstName(value) }} /><br />
+      LastName: <input type='text' name='lastName' value={lastName} onChange={({ target: { value } }) => { setLastName(value) }} /><br />
+      Age: <input type='number' name='age' value={age} onChange={({ target: { value } }) => { setAge(+value) }} /><br />
 
-  onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    if (name === 'age') {
-      this.setState({
-        age: +value
-      });
-    } else {
-      this.setState({
-        [name]: value
-      });
-    }
-
-  }
-
-  render() {
-    const { firstName, lastName, age } = this.state;
-    const { closePopup } = this.props;
-
-    return (
-      <div>
-        FirstName: <input type='text' name='firstName' value={firstName} onChange={this.onChangeHandler} /><br />
-        LastName: <input type='text' name='lastName' value={lastName} onChange={this.onChangeHandler} /><br />
-        Age: <input type='number' name='age' value={age} onChange={this.onChangeHandler} /><br />
-
-        <button onClick={closePopup}>
-          Cancel
-        </button>
-        <button onClick={this.onSaveHandler}>
-          Save
-        </button>
-      </div>
-    );
-  }
+      <button onClick={closePopup}>
+        Cancel
+      </button>
+      <button onClick={onSaveHandler}>
+        Save
+      </button>
+    </div>
+  );
 }
+
+NewPersonPopup.propTypes = {
+  closePopup: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
+};
 
 export default NewPersonPopup;

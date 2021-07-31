@@ -1,31 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class TodoRow extends Component {
-
-  static propTypes = {
-    todo: PropTypes.object.isRequired,
-    onDelete: PropTypes.func.isRequired
-  };
-
-  render() {
-    const { todo, onDelete } = this.props;
-
-    return (
-      <tr>
-        <td>{todo.id}</td>
-        <td>{todo.title}</td>
-        <td>{todo.content}</td>
-        <td>
-          <button onClick={() => {
-            onDelete(todo.id)
-          }}>
-            X
-          </button>
-        </td>
-      </tr>
-    );
-  }
+const TodoRow = ({ onDelete, todo }) => {
+  return (
+    <tr>
+      <td>{todo.id}</td>
+      <td>{todo.title}</td>
+      <td>{todo.content}</td>
+      <td>
+        <button onClick={() => {
+          onDelete(todo.id)
+        }}>
+          X
+        </button>
+      </td>
+    </tr>
+  );
 }
+TodoRow.propTypes = {
+  todo: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired
+};
 
 export default TodoRow;

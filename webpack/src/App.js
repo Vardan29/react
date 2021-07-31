@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ContactUs from './containers/contact-us';
 import About from './containers/about';
 import Todos from './containers/todos';
@@ -6,14 +6,11 @@ import Home from './containers/home';
 import { TABS } from './helpers/constants';
 import './assets/styles/index.css';
 
-class App extends Component {
-  state = {
-    selectedTabId: TABS[0].id
-  };
+const App = () => {
 
-  getSelectedTab() {
-    const { selectedTabId } = this.state;
+  const [selectedTabId, setSelectedTabId] = useState(TABS[0].id);
 
+  const getSelectedTab = () => {
     switch (selectedTabId) {
       case 1:
         return <Home />;
@@ -27,29 +24,25 @@ class App extends Component {
         return null;
     };
   };
-
-  render() {
-    const { selectedTabId } = this.state;
-
-    return (
-      <div>
-        <ul>
-          {TABS.map(tab => (
-            <li
-              key={tab.id}
-              className={tab.id === selectedTabId ? 'active' : ''}
-              onClick={() => this.setState({ selectedTabId: tab.id })}
-            >
-              {tab.name}
-            </li>
-          ))}
-        </ul>
-        <div className={'content'}>
-          {this.getSelectedTab()}
-        </div>
+  return (
+    <div>
+      <ul>
+        {TABS.map(tab => (
+          <li
+            key={tab.id}
+            className={tab.id === selectedTabId ? 'active' : ''}
+            onClick={() => setSelectedTabId(tab.id)}
+          >
+            {tab.name}
+          </li>
+        ))}
+      </ul>
+      <div className={'content'}>
+        {getSelectedTab()}
       </div>
-    );
-  }
+    </div>
+  );
+
 };
 
 export default App;
