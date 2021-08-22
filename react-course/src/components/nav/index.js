@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
-import { ROUTES } from '../../helpers/constants';
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ROUTES } from 'helpers/constants';
 
 const Nav = () => {
   const location = useLocation();

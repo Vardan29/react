@@ -1,6 +1,6 @@
-import {setTodos} from '../../store/action-creators';
-import store from '../../store';
-import API from '../api';
+import store from 'store';
+import API from 'core/api';
+import {setTodos} from 'store/action-creators';
 
 export function getTodos() {
   API.getAction(

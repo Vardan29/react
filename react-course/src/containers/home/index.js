@@ -1,11 +1,11 @@
-import {createPerson, deletePerson, getPersons} from '../../core/controllers/home';
-import NewPersonPopup from '../../components/new-person-popup';
-import {personsSelector} from '../../store/selectors/home';
-import PersonRow from '../../components/person-row';
-import {Link, useHistory} from 'react-router-dom';
-import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
+import PersonRow from 'components/person-row';
+import {personsSelector} from 'store/selectors/shop';
+import NewPersonPopup from 'components/new-person-popup';
+import {createPerson, deletePerson, getPersons} from 'core/controllers/shop';
 
 const Home = () => {
 

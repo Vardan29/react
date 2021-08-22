@@ -1,1 +1,0 @@
-export const personsSelector = (state) => state.persons;

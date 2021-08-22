@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {DAYS, GENDERS, MONTHS, REGEXP, YEARS} from '../../helpers/constants';
-import {signUpUser} from "../../core/controllers/signup";
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {GENDERS} from 'helpers/constants';
+import ValidationDate from 'components/shared/validation-date';
+import ValidationInput from 'components/shared/validation-input';
 
 const SignUp = () => {
     const [email, changeEmail] = useState('');
@@ -12,199 +14,134 @@ const SignUp = () => {
     const [month, changeMonth] = useState(0);
     const [year, changeYear] = useState(2021);
     const [gender, changeGender] = useState(1);
+    const [validations, setValidations] = useState({});
 
-    const [isValid, changeIsValid] = useState({
-        email: true,
-        fullName: true,
-        phone: true,
-        password: true,
-        confirmPassword: true,
-        date: true
-    });
+    const isValidEmail = () => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+    const isValidFullName = () => {
+        const re = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
+        return re.test(fullName);
+    };
+    const isValidPhone = () => {
+        const re = /^\+?[0-9]{11}$/;
+        return re.test(phone);
+    };
+    const isValidPassword = () => {
+        const re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        return re.test(password);
+    };
 
-    const validateEmail = () => {
-        changeIsValid({
-            ...isValid,
-            email: REGEXP.email.test(email.toLowerCase())
-        });
-    }
-
-    const validateFullName = () => {
-        changeIsValid({
-            ...isValid,
-            fullName: REGEXP.fullName.test(fullName)
-        });
-    }
-
-    const validatePhone = () => {
-        changeIsValid({
-            ...isValid,
-            phone: REGEXP.phone.test(phone)
-        });
-    }
-
-    const validatePassword = () => {
-        changeIsValid({
-            ...isValid,
-            password: REGEXP.password.test(password),
-            confirmPassword: confirmPassword === password
-        });
-    }
-
-    function calculateAge(birthday) {
-        const ageDifMs = Date.now() - birthday.getTime();
+    const isValidDate = () => {
+        const ageDifMs = Date.now() - new Date(year, month, day).getTime();
         const ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
+        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
+        return age > 10;
     }
 
-    const validateDate = () => {
-        changeIsValid({
-            ...isValid,
-            date: calculateAge(new Date(year, month, day)) > 10
-        });
-    }
+    const registerNewUser = () => {
+        const user = {
+            email,
+            fullName,
+            phone,
+            password,
+            birthDate: new Date(year, month, day),
+            gender
+        };
 
-    useEffect(() => {
-        if (email) {
-           validateEmail();
-        }
-    }, [email]);
-
-    useEffect(() => {
-        if (fullName) {
-           validateFullName();
-        }
-    }, [fullName]);
-
-    useEffect(() => {
-        if (password || confirmPassword) {
-            validatePassword();
-        }
-    }, [password, confirmPassword]);
-
-    useEffect(() => {
-       if (phone) {
-           validatePhone();
-       }
-    }, [phone]);
-
-    useEffect(() => {
-        if(year !== 2021 || month !== 0 || day !== 1){
-            validateDate();
-        }
-    }, [day, month, year]);
+        fetch('http://localhost:4000/users', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json UTF-8'
+            }
+        })
+            .then(res => res.json())
+            .then(user => {
+            });
+    };
 
     const signUp = () => {
-        const checked = Object.values(isValid).every(Boolean);
-        if(email && fullName && phone && password && checked){
-            const user = {
-                email,
-                fullName,
-                phone,
-                password,
-                birthDate: new Date(year, month, day),
-                gender
-            };
-            signUpUser(user);
-        } else {
-            changeIsValid({
-                email: REGEXP.email.test(email.toLowerCase()),
-                fullName: REGEXP.fullName.test(fullName),
-                phone: REGEXP.phone.test(phone),
-                password: REGEXP.password.test(password),
-                confirmPassword: confirmPassword === password,
-                date: calculateAge(new Date(year, month, day)) > 10
-            });
+        const newValidations = {};
+
+        if (!isValidEmail()) {
+            newValidations.email = 'Invalid Email';
         }
+        if (!isValidFullName()) {
+            newValidations.fullName = 'Invalid name';
+        }
+        if (!isValidPassword()) {
+            newValidations.password = 'Invalid Password';
+        }
+        if (!isValidPhone()) {
+            newValidations.phone = 'Invalid Phone number';
+        }
+        if (!isValidDate()) {
+            newValidations.date = 'Invalid date';
+        }
+        if (password !== confirmPassword) {
+            newValidations.confirmPassword = 'Passwords does not match';
+        }
+
+        if (Object.keys(newValidations).length === 0) {
+            registerNewUser();
+        }
+
+        setValidations(newValidations);
     };
 
     return (
         <div>
             <h1>Sign Up</h1>
 
-            Email:
-            <input
-                type={'text'}
+            <ValidationInput
+                title={'Email:'}
                 value={email}
-                className={!isValid.email ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeEmail(value)}
+                onChangeHandler={changeEmail}
+                validationMsg={validations.email}
             />
-            {!isValid.email && <span className={'validation-error'}>Email must be valid email address.</span>}
-            <br/>
 
-            Full Name:
-            <input
-                type={'text'}
+            <ValidationInput
+                title={'Full Name:'}
                 value={fullName}
-                className={!isValid.fullName ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeFullName(value)}
+                onChangeHandler={changeFullName}
+                validationMsg={validations.fullName}
             />
-            {!isValid.fullName &&
-            <span className={'validation-error'}>Full name must contain two words with minimum three symbols length for each.</span>}
-            <br/>
 
-            Phone:
-            <input
-                type={'text'}
+            <ValidationInput
+                title={'Phone:'}
                 value={phone}
-                className={!isValid.phone ? 'validation-error' : null}
-                onChange={({target: {value}}) => changePhone(value)}
+                onChangeHandler={changePhone}
+                validationMsg={validations.phone}
             />
-            {!isValid.phone && <span className={'validation-error'}>Phone must be valid phone number</span>}
-            <br/>
 
-            Password:
-            <input
+            <ValidationInput
+                title={'Password'}
                 type={'password'}
                 value={password}
-                className={!isValid.password ? 'validation-error' : null}
-                onChange={({target: {value}}) => changePassword(value)}
+                onChangeHandler={changePassword}
+                validationMsg={validations.password}
             />
-            {!isValid.password &&
-            <span className={'validation-error'}>Password have to contain minimum 8 symbols and at least one uppercase, one lowercase, one special and one numeric symbol.</span>}
-            <br/>
 
-            Confirm Password:
-            <input
+            <ValidationInput
+                title={'Confirm Password'}
                 type={'password'}
                 value={confirmPassword}
-                className={!isValid.confirmPassword ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeConfirmPassword(value)}
+                onChangeHandler={changeConfirmPassword}
+                validationMsg={validations.confirmPassword}
             />
-            {!isValid.confirmPassword &&
-            <span className={'validation-error'}>Confirm password and password have to match.</span>}
-            <br/>
 
-            Birth date:
-            <select
-                value={day}
-                className={!isValid.date ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeDay(+value)}
-            >
-                {DAYS.map((day) => (
-                    <option key={day} value={day}>{day}</option>
-                ))}
-            </select>
-            <select
-                value={month}
-                className={!isValid.date ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeMonth(+value)}
-            >
-                {MONTHS.map((month, i) => (
-                    <option key={month} value={i}>{month}</option>
-                ))}
-            </select>
-            <select
-                value={year}
-                className={!isValid.date ? 'validation-error' : null}
-                onChange={({target: {value}}) => changeYear(+value)}
-            >
-                {YEARS.map((year) => (
-                    <option key={year} value={year}>{year}</option>
-                ))}
-            </select>
-            {!isValid.date && <span className={'validation-error'}>You must be older then 10 years</span>}
-            <br/>
+            <ValidationDate
+                dateTitle={'Birth day:'}
+                day={day}
+                month={month}
+                year={year}
+                changeDayHandler={changeDay}
+                changeMonthHandler={changeMonth}
+                changeYearHandler={changeYear}
+                validationMsg={validations.date}
+            />
 
             {GENDERS.map(currentGender => (
                 <label key={currentGender.id}>
@@ -220,6 +157,9 @@ const SignUp = () => {
             <br/>
 
             <button onClick={signUp}>Sign Up</button>
+            <Link to={'/signIn'}>
+                <button>Sign In</button>
+            </Link>
         </div>
     );
 }

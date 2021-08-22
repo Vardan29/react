@@ -1,15 +1,14 @@
-import {ROUTES} from './helpers/constants';
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
 	BrowserRouter as Router,
 	Redirect,
 	Switch,
 	Route
 } from 'react-router-dom';
-import Nav from './components/nav';
+import Nav from 'components/nav';
+import {ROUTES} from 'helpers/constants';
 
 const App = () => {
-
 	return (
 		<Router>
 			<div>

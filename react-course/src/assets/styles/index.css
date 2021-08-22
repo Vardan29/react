@@ -18,11 +18,3 @@ ul {
     left: 100px;
     top: 0;
 }
-
-.validation-error {
-    border: solid 1px red;
-}
-span.validation-error {
-    color: red;
-    border: none;
-}

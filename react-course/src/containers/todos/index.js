@@ -1,10 +1,10 @@
-import {createTodo, deleteTodo, getTodos} from '../../core/controllers/todos';
-import NewPersonPopup from '../../components/new-person-popup';
-import {todosSelector} from '../../store/selectors/todo';
-import React, {useEffect, useState} from 'react';
-import TodoRow from '../../components/todo-row';
-import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import TodoRow from 'components/todo-row';
+import {todosSelector} from 'store/selectors/todo';
+import NewPersonPopup from 'components/new-person-popup';
+import {createTodo, deleteTodo, getTodos} from 'core/controllers/todos';
 
 const Todos = () => {
 

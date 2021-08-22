@@ -1,10 +1,8 @@
-import ContactUs from '../../containers/contact-us';
-import SignIn from '../../containers/sign-in';
-import Todos from '../../containers/todos';
-import About from '../../containers/about';
-import Home from '../../containers/home';
 import React from 'react';
-import SignUp from '../../containers/sign-up';
+import Shop from 'containers/shop';
+import SignIn from 'containers/sign-in';
+import SignUp from 'containers/sign-up';
+import Bag from 'containers/bag';
 
 export const ROUTES = [
   {
@@ -23,32 +21,32 @@ export const ROUTES = [
   },
   {
     id: 3,
-    path: '/home',
-    name: 'Home',
+    path: '/shop',
+    name: 'Shop',
     isAuth: false,
-    component: <Home/>
+    component: <Shop/>
   },
   {
     id: 4,
-    path: '/todos',
-    name: 'Todos',
+    path: '/bag',
+    name: 'Bag',
     isAuth: false,
-    component: <Todos/>
+    component: <Bag/>
   },
-  {
-    id: 5,
-    path: '/about',
-    name: 'About',
-    isAuth: false,
-    component: <About/>
-  },
-  {
-    id: 6,
-    path: '/contactUs',
-    name: 'Contact US',
-    isAuth: false,
-    component: <ContactUs/>
-  }
+  // {
+  //   id: 5,
+  //   path: '/about',
+  //   name: 'About',
+  //   isAuth: false,
+  //   component: <About/>
+  // },
+  // {
+  //   id: 6,
+  //   path: '/contactUs',
+  //   name: 'Contact US',
+  //   isAuth: false,
+  //   component: <ContactUs/>
+  // }
 ];
 
 export const DAYS = [];
@@ -81,10 +79,3 @@ export const GENDERS = [
   { id: 2, label: 'Female' },
   { id: 3, label: 'Other' }
 ]
-
-export const REGEXP = {
-  email: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-  fullName: /^([\w]{3,})+\s+([\w\s]{3,})+$/i,
-  phone: /^\+?[0-9]{11}$/,
-  password: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-}

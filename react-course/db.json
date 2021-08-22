@@ -9,54 +9,26 @@
       "id": 2,
       "username": "user-1",
       "password": "123456"
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
     }
   ],
-  "persons": [
+  "products": [
     {
       "id": 1,
-      "firstName": "Karen",
-      "lastName": "Adamyan",
-      "age": 25
+      "title": "Title - 1",
+      "description": "Description - 1",
+      "price": 1000,
+      "count": 7,
+      "imgName": "111.png",
+      "isInBag": false
     },
     {
       "id": 2,
-      "firstName": "Narek",
-      "lastName": "Sargsyan",
-      "age": 30
-    },
-    {
-      "id": 3,
-      "firstName": "Marine",
-      "lastName": "Isoyan",
-      "age": 20
-    }
-  ],
-  "todos": [
-    {
-      "id": 1,
-      "title": "AAA"
-    },
-    {
-      "id": 2,
-      "title": "BBB"
+      "title": "Title - 2",
+      "description": "Description - 2",
+      "price": 300,
+      "count": 15,
+      "imgName": "111.png",
+      "isInBag": false
     }
   ]
 }
