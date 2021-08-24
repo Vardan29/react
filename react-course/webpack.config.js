@@ -44,15 +44,4 @@ module.exports = {
         open: true,
         hot: true
     },
-    resolve: {
-        alias: {
-            src: path.resolve(__dirname, 'src/'),
-            core: path.resolve(__dirname, 'src/core/'),
-            store: path.resolve(__dirname, 'src/store/'),
-            assets: path.resolve(__dirname, 'src/assets/'),
-            helpers: path.resolve(__dirname, 'src/helpers/'),
-            containers: path.resolve(__dirname, 'src/containers/'),
-            components: path.resolve(__dirname, 'src/components/')
-        }
-    }
 };

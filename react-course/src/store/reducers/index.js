@@ -1,4 +1,4 @@
-import {ADD_TO_BAG, SET_PRODUCTS, REMOVE_FROM_BAG, CLEAR_BAG} from 'store/action-types';
+import {ADD_TO_BAG, SET_PRODUCTS, REMOVE_FROM_BAG, CLEAR_BAG} from '../action-types';
 
 const initialState = {
     products: null,

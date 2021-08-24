@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {GENDERS} from 'helpers/constants';
-import ValidationDate from 'components/shared/validation-date';
-import ValidationInput from 'components/shared/validation-input';
+import {GENDERS} from '../../helpers/constants';
+import ValidationDate from '../../components/shared/validation-date';
+import ValidationInput from '../../components/shared/validation-input';
 
 const SignUp = () => {
     const [email, changeEmail] = useState('');

@@ -1,4 +1,4 @@
-import Service from 'core/service';
+import Service from '../../core/service';
 
 const API = {};
 

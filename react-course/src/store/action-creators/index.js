@@ -1,4 +1,4 @@
-import {SET_PRODUCTS, ADD_TO_BAG, REMOVE_FROM_BAG, CLEAR_BAG} from 'store/action-types';
+import {SET_PRODUCTS, ADD_TO_BAG, REMOVE_FROM_BAG, CLEAR_BAG} from '../action-types';
 
 export const setProducts = (payload) => ({
 	type: SET_PRODUCTS,

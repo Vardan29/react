@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux';
-import Product from 'components/product';
-import {getProducts} from 'core/controllers/shop';
-import {productsSelector} from 'store/selectors/shop';
+import Product from '../../components/product';
+import {getProducts} from '../../core/controllers/shop';
+import {productsSelector} from '../../store/selectors/shop';
 
 const Shop = () => {
 

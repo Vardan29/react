@@ -1,8 +1,8 @@
 import React from 'react';
-import Shop from 'containers/shop';
-import SignIn from 'containers/sign-in';
-import SignUp from 'containers/sign-up';
-import Bag from 'containers/bag';
+import Shop from '../../containers/shop';
+import SignIn from '../../containers/sign-in';
+import SignUp from '../../containers/sign-up';
+import Bag from '../../containers/bag';
 
 export const ROUTES = [
   {

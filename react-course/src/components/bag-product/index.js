@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {removeFromBag} from 'store/action-creators';
+import {removeFromBag} from '../../store/action-creators';
 
 const BagProduct = ({id, title, description, image, price, amount}) => {
     const dispatch = useDispatch();

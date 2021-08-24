@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useHistory, useLocation} from 'react-router-dom';
-import InputField from 'components/shared/input-field';
+import InputField from '../../components/shared/input-field';
 
 const SignIn = () => {
 

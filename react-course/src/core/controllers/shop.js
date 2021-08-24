@@ -1,6 +1,6 @@
-import store from 'store';
-import API from 'core/api';
-import {setProducts} from 'store/action-creators';
+import store from '../../store';
+import API from '../../core/api';
+import {setProducts} from '../../store/action-creators';
 
 export function getProducts() {
   API.getAction(

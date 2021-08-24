@@ -5,8 +5,8 @@ import {
 	Switch,
 	Route
 } from 'react-router-dom';
-import Nav from 'components/nav';
-import {ROUTES} from 'helpers/constants';
+import Nav from './components/nav';
+import {ROUTES} from './helpers/constants';
 
 const App = () => {
 	return (

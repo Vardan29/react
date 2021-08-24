@@ -1,5 +1,5 @@
 import React from 'react';
-import {DAYS, MONTHS, YEARS} from 'helpers/constants';
+import {DAYS, MONTHS, YEARS} from '../../../helpers/constants';
 
 const ValidationDate = ({dateTitle, day, month, year, changeDayHandler, changeMonthHandler, changeYearHandler, validationMsg}) => {
     return (

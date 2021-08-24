@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {clearBag} from 'store/action-creators';
-import BagProduct from 'components/bag-product';
-import {bagSelector} from 'store/selectors/shop';
+import {clearBag} from '../../store/action-creators';
+import BagProduct from '../../components/bag-product';
+import {bagSelector} from '../../store/selectors/shop';
 
 const Bag = () => {
     const bag = useSelector(bagSelector);

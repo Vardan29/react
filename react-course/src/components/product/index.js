@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {addToBag} from 'store/action-creators';
+import {addToBag} from '../../store/action-creators';
 import ProductAmount from './product-amount';
 
 
@@ -14,7 +14,7 @@ const Product = ({ index, title, description, image, price, count }) => {
     }
     return (
         <div className={'product'}>
-            <img src={require(`assets/images/${image}`).default} alt={title}/>
+            <img src={require(`../../assets/images/${image}`).default} alt={title}/>
             <h2>{title}</h2>
             <p>{description}</p>
             <p>
