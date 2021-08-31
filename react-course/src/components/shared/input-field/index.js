@@ -14,6 +14,4 @@ const InputField = ({ title, type, value, onChangeHandler }) => {
     )
 };
 
-const MemoizedValue = React.memo(InputField);
-
-export default MemoizedValue;
+export default React.memo(InputField);

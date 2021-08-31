@@ -19,15 +19,10 @@ const Shop = () => {
     return (
         <div className={'shop'}>
             {
-                products.map((product, index) => (
+                products.map((product) => (
                     <Product
-                        index={index}
                         key={product.id}
-                        title={product.title}
-                        description={product.description}
-                        image={product.imgName}
-                        price={product.price}
-                        count={product.count}
+                        product={product}
                     />
                 ))
             }

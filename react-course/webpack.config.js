@@ -14,12 +14,12 @@ const LOADERS = [
         use: ['babel-loader']
     },
     {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.(png|jpe?g|gif)$/,
+        use: ['url-loader']
     },
     {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: ['url-loader'],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
     }
 ];
 
@@ -28,20 +28,18 @@ module.exports = {
         index: path.resolve(__dirname, 'src', 'index.js')
     },
     output: {
-        path: path.resolve(__dirname, 'build'),
-        filename: "main.js"
-    },
-    mode: 'development',
-    plugins: PLUGINS,
-    module: {
-        strictExportPresence: true,
-        rules: LOADERS
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'main.js'
     },
     devServer: {
-        historyApiFallback: true,
-        contentBase: '/',
-        port: 3000,
+        hot: true,
         open: true,
-        hot: true
+        port: 3000,
+        historyApiFallback: true
     },
-};
+    plugins: PLUGINS,
+    module: {
+        rules: LOADERS
+    },
+    mode: 'development'
+}

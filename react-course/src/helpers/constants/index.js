@@ -1,52 +1,38 @@
 import React from 'react';
-import Shop from '../../containers/shop';
-import SignIn from '../../containers/sign-in';
-import SignUp from '../../containers/sign-up';
-import Bag from '../../containers/bag';
+import SignIn from "../../containers/sign-in";
+import SignUp from "../../containers/sign-up";
+import Shop from "../../containers/shop";
+import Bag from "../../containers/bag";
 
 export const ROUTES = [
-  {
-    id: 1,
-    path: '/signIn',
-    name: 'SignIn',
-    isAuth: true,
-    component: <SignIn/>
-  },
-  {
-    id: 2,
-    path: '/signUp',
-    name: 'SignUp',
-    isAuth: true,
-    component: <SignUp/>
-  },
-  {
-    id: 3,
-    path: '/shop',
-    name: 'Shop',
-    isAuth: false,
-    component: <Shop/>
-  },
-  {
-    id: 4,
-    path: '/bag',
-    name: 'Bag',
-    isAuth: false,
-    component: <Bag/>
-  },
-  // {
-  //   id: 5,
-  //   path: '/about',
-  //   name: 'About',
-  //   isAuth: false,
-  //   component: <About/>
-  // },
-  // {
-  //   id: 6,
-  //   path: '/contactUs',
-  //   name: 'Contact US',
-  //   isAuth: false,
-  //   component: <ContactUs/>
-  // }
+    {
+        id: 1,
+        name: 'SignIn',
+        path: '/sign-in',
+        component: <SignIn />,
+        isAuth: true
+    },
+    {
+        id: 2,
+        name: 'SignUp',
+        path: '/sign-up',
+        component: <SignUp />,
+        isAuth: true
+    },
+    {
+        id: 3,
+        name: 'Shop',
+        path: '/shop',
+        component: <Shop />,
+        isAuth: false
+    },
+    {
+        id: 4,
+        name: 'Bag',
+        path: '/bag',
+        component: <Bag />,
+        isAuth: false
+    }
 ];
 
 export const DAYS = [];
@@ -78,4 +64,4 @@ export const GENDERS = [
   { id: 1, label: 'Male' },
   { id: 2, label: 'Female' },
   { id: 3, label: 'Other' }
-]
+];

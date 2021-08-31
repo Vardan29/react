@@ -13,8 +13,6 @@ const ValidationInput = ({ title, type, value, onChangeHandler, validationMsg })
       <br/>
     </>
   )
-};
+}; 
 
-const MemoizedValue = React.memo(ValidationInput);
-
-export default MemoizedValue;
+export default React.memo(ValidationInput);

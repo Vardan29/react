@@ -35,4 +35,4 @@ const ValidationDate = ({dateTitle, day, month, year, changeDayHandler, changeMo
     );
 }
 
-export default ValidationDate;
+export default React.memo(ValidationDate);

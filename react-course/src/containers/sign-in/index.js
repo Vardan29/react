@@ -1,29 +1,28 @@
 import React, {useState} from 'react';
-import {Link, useHistory, useLocation} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import InputField from '../../components/shared/input-field';
+import { getUsers } from '../../core/controllers/signIn';
 
 const SignIn = () => {
 
     const history = useHistory();
-    const location = useLocation();
     const [username, changeUsername] = useState('');
     const [password, changePassword] = useState('');
-    console.log(location.pathname);
+
+    const checkUser = (users) => {
+        const user = users.find(user => (user.username.toLowerCase() === username.toLowerCase() && user.password === password));
+
+        if (user) {
+            history.push('/shop');
+        } else {
+            alert('Invalid username password');
+            changeUsername('');
+            changePassword('');
+        }
+    }
 
     const onSignIn = () => {
-        fetch('http://localhost:4000/users')
-            .then(res => res.json())
-            .then(users => {
-                const user = users.find(user => (user.username.toLowerCase() === username.toLowerCase() && user.password === password));
-
-                if (user) {
-                    history.push('/home');
-                } else {
-                    alert('Invalid username password');
-                    changeUsername('');
-                    changePassword('');
-                }
-            });
+        getUsers(checkUser);
     };
 
     return (
@@ -43,7 +42,7 @@ const SignIn = () => {
             <button onClick={onSignIn}>
                 Sign In
             </button>
-            <Link to={'/signUp'}>
+            <Link to={'/sign-up'}>
                 <button>Sign Up</button>
             </Link>
         </div>

@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import {GENDERS} from '../../helpers/constants';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { GENDERS } from '../../helpers/constants';
 import ValidationDate from '../../components/shared/validation-date';
 import ValidationInput from '../../components/shared/validation-input';
+import { createUser } from '../../core/controllers/signUp';
 
 const SignUp = () => {
+    const history = useHistory();
     const [email, changeEmail] = useState('');
     const [fullName, changeFullName] = useState('');
     const [phone, changePhone] = useState('');
@@ -38,7 +40,7 @@ const SignUp = () => {
         const ageDate = new Date(ageDifMs);
         const age = Math.abs(ageDate.getUTCFullYear() - 1970);
         return age > 10;
-    }
+    };
 
     const registerNewUser = () => {
         const user = {
@@ -50,16 +52,8 @@ const SignUp = () => {
             gender
         };
 
-        fetch('http://localhost:4000/users', {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json UTF-8'
-            }
-        })
-            .then(res => res.json())
-            .then(user => {
-            });
+        createUser(user);
+        history.push('/shop');
     };
 
     const signUp = () => {
@@ -154,14 +148,14 @@ const SignUp = () => {
                     {currentGender.label}
                 </label>
             ))}
-            <br/>
+            <br />
 
             <button onClick={signUp}>Sign Up</button>
-            <Link to={'/signIn'}>
+            <Link to={'/sign-in'}>
                 <button>Sign In</button>
             </Link>
         </div>
     );
-}
+};
 
 export default SignUp;

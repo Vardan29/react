@@ -1,28 +1,31 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addToBag} from '../../store/action-creators';
-import ProductAmount from './product-amount';
 
-
-const Product = ({ index, title, description, image, price, count }) => {
-    const [amount, changeAmount] = useState(0)
+const Product = ({ product }) => {
+    const { count, imgName, title, description, price} = product;
+    const [currentCount, changeCount] = useState(1);
     const dispatch = useDispatch();
     const onAddToBag = () => {
-        if (amount > 0) {
-            dispatch(addToBag({index, amount}));
-        }
+        dispatch(addToBag({...product, count: currentCount}));
     }
+
+    const onChangeCount = ({target: {value}}) => {
+        if (value > 0 && value <= count) {
+            changeCount(+value);
+        }
+    };
     return (
         <div className={'product'}>
-            <img src={require(`../../assets/images/${image}`).default} alt={title}/>
+            <img src={require(`../../assets/images/${imgName}`).default} alt={title}/>
             <h2>{title}</h2>
             <p>{description}</p>
             <p>
                 <span>{price}</span>
-                <ProductAmount
-                    count={count}
-                    amount={amount}
-                    changeAmountHandler={changeAmount}
+                <input 
+                    type={'number'} 
+                    value={currentCount}
+                    onChange={onChangeCount}
                 />
             </p>
             <button
