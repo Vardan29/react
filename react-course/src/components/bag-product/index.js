@@ -2,31 +2,41 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {removeFromBag} from '../../store/action-creators';
 
-const BagProduct = ({id, title, description, image, price, amount}) => {
-    const dispatch = useDispatch();
+const BagProduct = ({product}) => {
+  const {count, imgName, title, description, price} = product;
+  const [currentCount, changeCount] = useState(1);
+  const dispatch = useDispatch();
+  const onRemoveFromBag = () => {
+    dispatch(removeFromBag({...product, count: currentCount}));
+  };
 
-    const onRemoveFromBag = () => {
-            dispatch(removeFromBag(id));
+  const onChangeCount = ({target: {value}}) => {
+    if (value > 0 && value <= count) {
+      changeCount(+value);
     }
+  };
 
-    return (
-        <div className={'product'}>
-            <img src={require(`assets/images/${image}`).default} alt={title}/>
-            <h2>{title}</h2>
-            <p>{description}</p>
-            <p>
-                <span>{price * amount}</span>
-                <span>
-                    {amount}
-                </span>
-            </p>
-            <button
-                onClick={onRemoveFromBag}
-            >
-                Remove
-            </button>
-        </div>
-    )
+  return (
+    <div className={'product'}>
+      <img src={require(`../../assets/images/${imgName}`).default} alt={title}/>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>
+        <span>{price}</span>
+        <input
+          type={'number'}
+          value={currentCount}
+          onChange={onChangeCount}
+        />
+      </p>
+      <p>Amount: {price * count}</p>
+      <button
+        onClick={onRemoveFromBag}
+      >
+        Remove from bag
+      </button>
+    </div>
+  )
 }
 
 export default BagProduct;

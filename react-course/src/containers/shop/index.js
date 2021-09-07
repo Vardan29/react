@@ -6,28 +6,30 @@ import {productsSelector} from '../../store/selectors/shop';
 
 const Shop = () => {
 
-    const products = useSelector(productsSelector);
+  const products = useSelector(productsSelector);
 
-    useEffect(() => {
-        getProducts();
-    }, []);
-
-    if (!products) {
-        return <h2>Loading...</h2>
+  useEffect(() => {
+    if(products === null){
+      getProducts();
     }
+  }, []);
 
-    return (
-        <div className={'shop'}>
-            {
-                products.map((product) => (
-                    <Product
-                        key={product.id}
-                        product={product}
-                    />
-                ))
-            }
-        </div>
-    )
+  if (!products) {
+    return <h2>Loading...</h2>
+  }
+
+  return (
+    <div className={'shop'}>
+      {
+        products.map((product) => (
+          <Product
+            key={product.id}
+            product={product}
+          />
+        ))
+      }
+    </div>
+  )
 }
 
 export default Shop;
